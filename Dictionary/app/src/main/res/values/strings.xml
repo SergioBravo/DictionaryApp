@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Dictionary</string>
+
+    <string name="autocomplete_hint">Enter a word</string>
+
+    <string name="buttonText">Translate</string>
 </resources>

@@ -3,9 +3,29 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mainBackground">
+    android:background="@color/mainBackgroundColor">
 
     <include android:id="@+id/toolbar"
         layout="@layout/toolbar" />
+
+    <android.support.v7.widget.AppCompatAutoCompleteTextView
+        android:id="@+id/autoCompleteTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/primaryText"
+        android:hint="@string/autocomplete_hint"
+        android:textColorHint="@color/primaryText"
+        android:layout_gravity="center_horizontal"
+        android:completionThreshold="2"
+        android:singleLine="true" />
+
+    <Button
+        android:id="@+id/translateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/buttonText"/>
 
 </LinearLayout>
