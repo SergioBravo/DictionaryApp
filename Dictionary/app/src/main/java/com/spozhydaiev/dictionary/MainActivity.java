@@ -3,10 +3,11 @@ package com.spozhydaiev.dictionary;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements View.OnClickListener {
 
     private Toolbar toolbar;
     private AutoCompleteTextView actv;
@@ -20,6 +21,8 @@ public class MainActivity extends Activity {
         initToolbar();
         initAutoCompleteTextView();
         initTranslateButton();
+
+        translateBtn.setOnClickListener(this);
     }
 
     private void initToolbar() {
@@ -33,5 +36,10 @@ public class MainActivity extends Activity {
 
     private void initTranslateButton() {
         translateBtn = (Button) findViewById(R.id.translateButton);
+    }
+
+    @Override
+    public void onClick(View v) {
+        String word = actv.getText().toString();
     }
 }
