@@ -1,10 +1,14 @@
 package com.spozhydaiev.dictionary;
 
 import android.app.Activity;
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -12,9 +16,13 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.spozhydaiev.dictionary.db.DictionaryDBHandler;
+
 import java.util.ArrayList;
 
 public class MainActivity extends Activity implements View.OnClickListener, TextWatcher {
+
+    final String LOG_TAG = "myLog";
 
     private Toolbar toolbar;
     private AutoCompleteTextView actv;
@@ -25,6 +33,8 @@ public class MainActivity extends Activity implements View.OnClickListener, Text
 
     final ArrayList<String> latestWords = new ArrayList<>();
     final ArrayList<String> hintWords = new ArrayList<>();
+
+    private DictionaryDBHandler dbHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +64,8 @@ public class MainActivity extends Activity implements View.OnClickListener, Text
         actvAdapter = new ArrayAdapter(
                 this, android.R.layout.simple_dropdown_item_1line, hintWords);
         actv.setAdapter(actvAdapter);
+
+        dbHandler = new DictionaryDBHandler(this);
     }
 
     private void initToolbar() {
@@ -72,12 +84,26 @@ public class MainActivity extends Activity implements View.OnClickListener, Text
 
     @Override
     public void onClick(View v) {
-        String notFind = actv.getText().toString();
-        latestWords.add(0, notFind);
+
+        ContentValues contentValues = new ContentValues();
+        String word = actv.getText().toString();
+        String translate = "translate";
+
+        SQLiteDatabase db = dbHandler.getWritableDatabase();
+
+        Log.d(LOG_TAG, "--Insert in table--");
+
+        contentValues.put("searchWord", word);
+        contentValues.put("translate", "translate");
+        // вставляем запись и получаем ее ID
+        long rowID = db.insert("words", null, contentValues);
+        Log.d(LOG_TAG, "row inserted, ID = " + rowID);
+
+        latestWords.add(0, word);
         adapter.notifyDataSetChanged();
 
-        if (!(hintWords.contains(notFind))) {
-            hintWords.add(notFind);
+        if (!(hintWords.contains(word))) {
+            hintWords.add(word);
             actvAdapter.notifyDataSetChanged();
         }
     }
