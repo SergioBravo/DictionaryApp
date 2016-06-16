@@ -15,7 +15,7 @@
         android:layout_marginTop="10dp"
         android:textColor="@color/primaryText"
         android:hint="@string/autocomplete_hint"
-        android:textColorHint="@color/primaryText"
+        android:textColorHint="@color/hintText"
         android:layout_gravity="center_horizontal"
         android:completionThreshold="2"
         android:singleLine="true" />
@@ -27,5 +27,18 @@
         android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
         android:text="@string/buttonText"/>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/primaryText"
+        android:background="@color/listItemBackground"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:divider="@color/listDivider"
+        android:dividerHeight="1dp"/>
 
 </LinearLayout>

@@ -5,4 +5,8 @@
     <color name="mainBackgroundColor">#e2e2e2</color>
 
     <color name="primaryText">#e6000000</color>
+    <color name="hintText">#212121</color>
+
+    <color name="listItemBackground">#ffffff</color>
+    <color name="listDivider">#616161</color>
 </resources>
