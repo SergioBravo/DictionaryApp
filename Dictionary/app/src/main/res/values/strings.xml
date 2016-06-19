@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Dictionary</string>
 
-    <string name="autocomplete_hint">Enter a word</string>
+    <string name="autocomplete_hint">Введите слово</string>
 
-    <string name="buttonText">Translate</string>
+    <string name="buttonText">Перевести</string>
+
+    <string name="buttonBack">Назад</string>
 </resources>

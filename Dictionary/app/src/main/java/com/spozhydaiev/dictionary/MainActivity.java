@@ -2,6 +2,7 @@ package com.spozhydaiev.dictionary;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
@@ -22,7 +23,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends Activity implements View.OnClickListener, TextWatcher {
 
-    final String LOG_TAG = "myLog";
+    public static final int TRANSLATE_ACTIVITY = 1234;
+    public static final String LOG_TAG = "myLog";
 
     private Toolbar toolbar;
     private AutoCompleteTextView actv;
@@ -94,7 +96,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Text
         Log.d(LOG_TAG, "--Insert in table--");
 
         contentValues.put("searchWord", word);
-        contentValues.put("translate", "translate");
+        contentValues.put("translate", translate);
         // вставляем запись и получаем ее ID
         long rowID = db.insert("words", null, contentValues);
         Log.d(LOG_TAG, "row inserted, ID = " + rowID);
@@ -106,6 +108,11 @@ public class MainActivity extends Activity implements View.OnClickListener, Text
             hintWords.add(word);
             actvAdapter.notifyDataSetChanged();
         }
+
+        Intent intent = new Intent(this, TranslateActivity.class);
+        intent.putExtra(TranslateActivity.KEY_WORD, word);
+        intent.putExtra(TranslateActivity.KEY_TRANSLATE, translate);
+        startActivityForResult(intent, TRANSLATE_ACTIVITY);
     }
 
     @Override
